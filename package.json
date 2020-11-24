@@ -1,0 +1,37 @@
+{
+  "name": "wms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Captivest/WMS.git"
+  },
+  "author": "Captivest",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Captivest/WMS/issues"
+  },
+  "homepage": "https://github.com/Captivest/WMS#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15",
+    "passport": "^0.4.1",
+    "passport-github": "^1.1.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
