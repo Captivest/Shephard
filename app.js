@@ -9,7 +9,7 @@ var mongoose=require('mongoose')
 const passport = require('passport')
 var MongoStore=require('connect-mongo')(session)
 var URI=process.env.URI
-//####################################################
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 mongoose.set("useFindAndModify",false)
@@ -25,15 +25,15 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-//####################################################
+
 mongoose.connect(URI,{useNewUrlParser:true,useUnifiedTopology:true})
-//####################################################
+
 auth(app,UserDB)
 routes(app,UserDB)
 app.get("/",(req,res)=>{
     res.send("HELLO")
 })
-//####################################################
+
 app.listen(7000,()=>{
     console.log("Server Started")
 })
