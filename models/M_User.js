@@ -10,7 +10,8 @@ var UserSchema=new mongoose.Schema({
         type:String,
         unique:true
     },
-    password:String
+    password:String,
+    todo:[{type:mongoose.Schema.Types.ObjectId,ref:'Todo'}]
 })
 
 module.exports=mongoose.model('User',UserSchema)

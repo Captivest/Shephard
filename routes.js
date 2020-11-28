@@ -1,5 +1,7 @@
 const passport = require("passport")
 const bcrypt = require("bcrypt")
+const Todo=require('./models/M_todo.js')
+const User=require('./models/M_User.js')
 
 module.exports = (app, UserDB) => {
     const isAuthenticated = (req, res, next) => {
@@ -49,5 +51,16 @@ module.exports = (app, UserDB) => {
 
     app.route('/profile/:username').get(isAuthenticated, (req, res) => {
         res.send(req.params.username)
+    })
+
+    app.route('/:id/newtodo').post((req,res)=>{
+        let nt=new Todo({t_user:req.params.id,t_body:req.body.t_body,t_title:req.body.t_title})
+        nt.save()
+        User.findById(req.params.id,(err,user)=>{
+            user.todo.push(nt)
+            user.save()
+        }).populate('todo').exec((err)=>{
+            if(!err) return console.log("Populated Successfully")
+        })
     })
 }

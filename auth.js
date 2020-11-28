@@ -3,10 +3,8 @@ const passport=require('passport')
 const LocalStrategy=require('passport-local')
 const GithubStrategy=require("passport-github").Strategy
 const ObjectID=require('mongodb').ObjectID
-
 const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-
-
+//########################################################################
 
 module.exports=(app,User)=>{
     passport.serializeUser((user,done)=>{
@@ -54,9 +52,10 @@ module.exports=(app,User)=>{
         passReqToCallback   : true
       },
       function(request, accessToken, refreshToken, profile, cb) {
-        User.findOneAndUpdate({ username: profile.username }, {
+          console.log(profile)
+        User.findOneAndUpdate({ username: profile.displayName}, {
             $set:{
-                username:profile.username,
+                username:profile.displayName,
                 email:profile.email
             }
         },{upsert:true,new:true,setDefaultsOnInsert:true},(err,doc)=>{
