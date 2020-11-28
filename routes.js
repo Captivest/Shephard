@@ -17,6 +17,11 @@ module.exports = (app, UserDB) => {
         res.redirect(`/profile/${req.body.username}`)
     })
 
+    app.route('/logout').get((req,res)=>{
+        req.logout()
+        res.redirect('/')
+    })
+
     app.route('/auth/github').get(passport.authenticate('github'))
     app.route('/auth/github/cb').get(passport.authenticate('github', {failureRedirect: '/'}), (req, res) => {
         console.log("SUCCESS")
