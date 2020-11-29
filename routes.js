@@ -64,8 +64,31 @@ module.exports = (app, UserDB) => {
         User.findById(req.params.id,(err,user)=>{
             user.todo.push(nt)
             user.save()
-        }).populate('todo').exec((err)=>{
+        }).populate('todo').exec((err,user)=>{
             if(!err) return console.log("Populated Successfully")
         })
     })
+
+    app.route('/:tid/update').put((req,res)=>{
+        Todo.findByIdAndUpdate(req.params.tid,{$set:{t_title:req.body.t_title,t_body:req.body.t_body}},{new:true},(err,todo)=>{
+            if(err) res.send("Error while updating todo")
+            res.send("Updated Successfully")
+        })
+    })
+    
+    app.route('/:uid/:tid/delete').delete((req,res)=>{
+        Todo.findByIdAndDelete(req.params.tid,(err)=>{
+            if(err) res.send("Cannot delete due to error")
+            res.send("Deleted Successfully")
+        })
+        User.findById(req.params.uid,(err,user)=>{
+            if(err) res.send("cannot find user")
+            let o=user.todo.indexOf(req.params.tid)
+            user.todo.splice(o,1)
+            user.save()
+            console.log("Removed from user")
+        })
+    })
+
+    
 }
