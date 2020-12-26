@@ -11,6 +11,7 @@ var UserSchema=new mongoose.Schema({
         unique:true
     },
     password:String,
+    organisation:String,
     todo:[{type:mongoose.Schema.Types.ObjectId,ref:'Todo'}]
 })
 

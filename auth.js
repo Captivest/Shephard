@@ -52,7 +52,6 @@ module.exports=(app,User)=>{
         passReqToCallback   : true
       },
       function(request, accessToken, refreshToken, profile, cb) {
-          console.log(profile)
         User.findOneAndUpdate({ username: profile.displayName}, {
             $set:{
                 username:profile.displayName,
