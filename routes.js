@@ -100,7 +100,7 @@ module.exports = (app, UserDB) => {
             else{
                let file=t_data.find(fl=>fl.originalname===req.params.fname)
                let newFile=new Buffer.alloc(file.buffer.length,file.buffer,'utf-8')
-               return res.json({orignalname:req.params.fname,file:newfile})
+               return {orignalname:req.params.fname,file:newfile}
             }
         })
     })
