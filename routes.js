@@ -98,9 +98,9 @@ module.exports = (app, UserDB) => {
         Todo.findById(req.params.tid,(err,t_data)=>{
             if(err) res.send("Todo not Found")
             else{
-               let file=t_data.find(fl=>fl.originalname===fname)
+               let file=t_data.find(fl=>fl.originalname===req.params.fname)
                let newFile=new Buffer.alloc(file.buffer.length,file.buffer,'utf-8')
-               return newFile
+               return res.json({orignalname:req.params.fname,file:newfile})
             }
         })
     })
